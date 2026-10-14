@@ -1,0 +1,1350 @@
+/* ==========================================================================
+   ENAMEL DENTAL STUDIO — HERO SECTION STYLESHEET
+   Aesthetic: Ultra-modern, Clean Medical Luxury, Glassmorphic, Single Viewport
+   ========================================================================== */
+
+:root {
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', var(--font-main);
+
+  /* Color Palette */
+  --color-navy: #091c33;
+  --color-navy-dark: #061324;
+  --color-navy-light: #162f52;
+  --color-white: #ffffff;
+  --color-white-translucent: rgba(255, 255, 255, 0.72);
+  --color-white-glass: rgba(255, 255, 255, 0.45);
+  --color-border-glass: rgba(255, 255, 255, 0.6);
+  --color-border-subtle: rgba(255, 255, 255, 0.25);
+  --color-text-subtle: rgba(255, 255, 255, 0.92);
+  --color-text-dim: #546b85;
+  --color-lime: #d2f83a;
+  --color-lime-glow: rgba(210, 248, 58, 0.45);
+  --color-sky-blue: #7bb5e2;
+
+  /* Glassmorphism Specs */
+  --glass-blur: blur(24px);
+  --glass-blur-heavy: blur(32px);
+  --glass-shadow: 0 12px 36px 0 rgba(10, 32, 60, 0.12), 0 2px 10px 0 rgba(0, 0, 0, 0.04);
+  --card-shadow: 0 20px 48px -12px rgba(8, 28, 54, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+
+  /* Transitions */
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Reset & Baseline — NO SCROLL / 100vh Hero Stage
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden; /* STRICT NO SCROLL TYPE */
+  font-family: var(--font-main);
+  color: var(--color-navy);
+  background-color: #9ac4ea;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------------------------------
+   Background Video & Overlays (Shifted to right side)
+   -------------------------------------------------------------------------- */
+.video-background-wrapper {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Shift video/tooth cleanly to the right side so text has clear negative space */
+  object-position: 72% center;
+  transform: scale(1.05);
+  filter: contrast(1.04) brightness(1.02) saturate(1.06);
+}
+
+/* Strategic subtle gradient to ensure text readibility on left while tooth is bright */
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(12, 35, 62, 0.44) 0%,
+    rgba(12, 35, 62, 0.28) 36%,
+    rgba(12, 35, 62, 0.08) 60%,
+    rgba(0, 0, 0, 0) 100%
+  ),
+  linear-gradient(
+    180deg,
+    rgba(12, 35, 62, 0.15) 0%,
+    rgba(0, 0, 0, 0) 25%,
+    rgba(10, 32, 60, 0.12) 100%
+  );
+  backdrop-filter: contrast(1.02);
+}
+
+.ambient-glow {
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(142, 203, 255, 0.18) 0%, rgba(255, 255, 255, 0) 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Header (Centered, Fully Blurred Glassmorphic Pill)
+   -------------------------------------------------------------------------- */
+.header-container {
+  position: fixed;
+  top: 18px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  padding: 0 24px;
+  pointer-events: none; /* Allows click-through outside the pill */
+}
+
+.navbar-glass {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 6px 8px 6px 20px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 9999px;
+  box-shadow: 
+    0 16px 36px -10px rgba(10, 32, 60, 0.14),
+    0 2px 6px 0 rgba(0, 0, 0, 0.03),
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  width: auto;
+  max-width: none;
+  box-sizing: border-box;
+  transition: var(--transition-smooth);
+  animation: slideDownHeader 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.navbar-glass:hover {
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 
+    0 20px 42px -10px rgba(10, 32, 60, 0.18),
+    0 4px 10px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Brand Logo */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--color-navy);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+.tooth-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  color: #1765c1;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.nav-brand:hover .tooth-icon-wrapper {
+  transform: rotate(-10deg) scale(1.15);
+}
+
+.tooth-svg {
+  width: 22px;
+  height: 22px;
+}
+
+.brand-text {
+  font-weight: 800;
+  color: #0d223f;
+  letter-spacing: -0.03em;
+}
+
+/* Nav Menu Links */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #3b506a;
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 7px 13px;
+  border-radius: 9999px;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: var(--color-navy);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Contact Button in Header — Cleanly contained inside the capsule */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.btn-contact {
+  background: #ffffff;
+  color: var(--color-navy);
+  border: 1px solid rgba(13, 34, 63, 0.18);
+  font-family: var(--font-main);
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 8px 22px;
+  border-radius: 9999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition-smooth);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.btn-contact:hover {
+  background: #0d223f;
+  color: #ffffff;
+  border-color: #0d223f;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(13, 34, 63, 0.2);
+}
+
+.btn-contact:active {
+  transform: translateY(0);
+}
+
+/* Mobile Toggle Hamburger */
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.mobile-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--color-navy);
+  border-radius: 2px;
+  transition: var(--transition-smooth);
+}
+
+/* Mobile Drawer */
+.mobile-drawer {
+  display: none;
+  position: fixed;
+  top: 76px;
+  left: 20px;
+  right: 20px;
+  z-index: 99;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.18);
+  padding: 20px;
+  transform: translateY(-10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition-smooth);
+}
+
+.mobile-drawer.is-open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-drawer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-nav-link {
+  text-decoration: none;
+  color: var(--color-navy);
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 10px 14px;
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+
+.mobile-nav-link:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.btn-contact-mobile {
+  margin-top: 8px;
+  background: var(--color-navy);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   Hero Section Main Stage Layout — Exact 100vh Single Viewport (No Scroll)
+   -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  max-height: 100vh;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  padding: 78px 48px 24px 64px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.hero-content-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(460px, 620px) 1fr;
+  align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   Hero Left Content
+   -------------------------------------------------------------------------- */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 15;
+  position: relative;
+  padding-bottom: 0;
+}
+
+/* Status Pill Badge: "• Same-week appointments" */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px 6px 12px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: var(--transition-smooth);
+}
+
+.pill-badge:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #69ffb4;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(105, 255, 180, 0.7);
+  animation: pulseGreen 2s infinite;
+}
+
+@keyframes pulseGreen {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(105, 255, 180, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(105, 255, 180, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(105, 255, 180, 0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Hero Main Title — Kinetic Masked Roll-Up & Enamel Shimmer (Zero Zoom)
+   -------------------------------------------------------------------------- */
+.hero-title {
+  font-family: var(--font-main);
+  font-size: clamp(2.8rem, 4.6vw, 4.6rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin-bottom: 16px;
+  text-shadow: 0 4px 24px rgba(7, 28, 54, 0.3);
+  cursor: default;
+}
+
+.kinetic-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.28em;
+  overflow: hidden;
+  padding: 4px 0;
+}
+
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 3px;
+  vertical-align: bottom;
+}
+
+.kinetic-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(115%);
+  filter: blur(10px);
+  animation: kineticRise 0.95s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0.2s) forwards;
+  will-change: transform, filter, opacity;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), text-shadow 0.3s ease;
+}
+
+/* Zero zoom: strictly pure vertical kinetic rise & de-blur */
+@keyframes kineticRise {
+  0% {
+    opacity: 0;
+    transform: translateY(115%);
+    filter: blur(12px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Living Enamel Prismatic Light Sweep across "true smile" */
+.highlight-enamel {
+  background: linear-gradient(
+    115deg,
+    #ffffff 0%,
+    #ffffff 30%,
+    #a8ddff 45%,
+    #ffffff 58%,
+    #e0f2fe 75%,
+    #ffffff 100%
+  );
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: 
+    kineticRise 0.95s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0.4s) forwards,
+    enamelShimmer 4.8s ease-in-out infinite 1.4s;
+  will-change: transform, filter, opacity, background-position;
+}
+
+@keyframes enamelShimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  35%, 100% {
+    background-position: -130% 50%;
+  }
+}
+
+/* Micro-interaction: Interactive tilt & luminous glow on hover */
+.word-mask:hover .kinetic-word {
+  transform: translateY(-3px);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 35px rgba(105, 255, 180, 0.45);
+}
+
+/* Hero Description Paragraph — Smooth Kinetic Unveil */
+.hero-description {
+  font-size: clamp(0.98rem, 1.15vw, 1.12rem);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 460px;
+  font-weight: 400;
+  margin-bottom: 22px;
+  text-shadow: 0 2px 10px rgba(8, 25, 48, 0.25);
+  opacity: 0;
+  transform: translateY(16px);
+  filter: blur(8px);
+  animation: descKinetic 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0.75s) forwards;
+  will-change: transform, filter, opacity;
+}
+
+@keyframes descKinetic {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 0.95;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   CTA Bar Pill (Book a Consultation + Loved by Patients)
+   -------------------------------------------------------------------------- */
+.hero-cta-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 14px 6px 6px;
+  background: rgba(11, 26, 48, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  box-shadow: 
+    0 16px 36px rgba(6, 19, 36, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  margin-bottom: 20px;
+  transition: var(--transition-smooth);
+}
+
+.hero-cta-bar:hover {
+  background: rgba(11, 26, 48, 0.96);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 
+    0 20px 42px rgba(6, 19, 36, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+  transform: translateY(-2px);
+}
+
+/* Action Pill inside CTA Bar */
+.cta-pill-action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #ffffff;
+  font-family: var(--font-main);
+  text-decoration: none;
+}
+
+.arrow-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--color-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: var(--transition-bounce);
+}
+
+.arrow-circle svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.cta-pill-action:hover .arrow-circle {
+  transform: scale(1.08);
+  background: var(--color-lime);
+  color: #0b1a2e;
+}
+
+.cta-pill-action:hover .arrow-circle svg {
+  transform: translateX(2px);
+}
+
+.action-label {
+  font-weight: 600;
+  font-size: 0.94rem;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* Divider inside CTA Bar */
+.cta-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Social Proof & Rating Group */
+.social-proof {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.social-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.loved-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: -0.01em;
+}
+
+.stars-row {
+  display: flex;
+  gap: 1px;
+  color: #ffd027;
+  font-size: 0.72rem;
+}
+
+.avatar-stack {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #0d223f;
+  margin-left: -8px;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.avatar:first-child {
+  margin-left: 0;
+}
+
+.avatar-stack:hover .avatar {
+  transform: translateY(-2px);
+}
+
+.avatar-count {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--color-lime);
+  color: #0d223f;
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #0d223f;
+  margin-left: -8px;
+  letter-spacing: -0.02em;
+}
+
+/* --------------------------------------------------------------------------
+   Detail Box: 98% Patient Return Card
+   -------------------------------------------------------------------------- */
+.detail-card-container {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  margin-top: 6px;
+}
+
+.stat-card-glass {
+  position: relative;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 22px;
+  padding: 18px 80px 18px 22px;
+  box-shadow: 
+    0 20px 40px -10px rgba(8, 25, 48, 0.2),
+    0 4px 10px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+  min-width: 240px;
+  max-width: 285px;
+  transition: var(--transition-smooth);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.stat-card-glass:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 24px 50px -10px rgba(8, 25, 48, 0.25),
+    0 6px 14px rgba(0, 0, 0, 0.06);
+}
+
+.card-glow-reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+  border-radius: 22px 22px 0 0;
+}
+
+.stat-content {
+  position: relative;
+  z-index: 3;
+}
+
+.stat-number {
+  font-family: var(--font-main);
+  font-size: 2.7rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+  color: #0c203b;
+  margin-bottom: 4px;
+}
+
+.stat-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.32;
+  color: #4b6380;
+  letter-spacing: -0.01em;
+}
+
+/* --------------------------------------------------------------------------
+   Happy Man Character Cutout — Middle Small Sized & Neatly Placed
+   -------------------------------------------------------------------------- */
+.happy-man-wrapper {
+  position: absolute;
+  left: 175px;
+  bottom: -6px;
+  z-index: 25;
+  width: 145px; /* Middle small size as requested */
+  height: auto;
+  pointer-events: auto;
+  cursor: pointer;
+  transform-origin: bottom center;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.happy-man-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 14px 24px rgba(5, 18, 35, 0.3));
+  user-select: none;
+  -webkit-user-drag: none;
+  animation: gentleFloat 4.5s ease-in-out infinite alternate;
+}
+
+.happy-man-wrapper:hover {
+  transform: scale(1.05) translateY(-4px);
+}
+
+.happy-man-shadow {
+  position: absolute;
+  bottom: -2px;
+  left: 15%;
+  width: 70%;
+  height: 10px;
+  background: radial-gradient(ellipse at center, rgba(8, 22, 42, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
+  border-radius: 50%;
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+@keyframes gentleFloat {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-6px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Corner Rotating Circular Button ("Rotating button circle")
+   -------------------------------------------------------------------------- */
+.corner-rotating-circle-wrapper {
+  position: absolute;
+  right: 48px;
+  bottom: 26px;
+  z-index: 25;
+}
+
+.rotating-badge-link {
+  text-decoration: none;
+  display: block;
+}
+
+.rotating-badge {
+  position: relative;
+  width: 126px;
+  height: 126px;
+  border-radius: 50%;
+  background: var(--color-lime);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 16px 36px -4px rgba(210, 248, 58, 0.4),
+    0 12px 28px -6px rgba(7, 24, 46, 0.28);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.rotating-badge:hover {
+  transform: scale(1.08);
+  box-shadow: 
+    0 20px 42px -4px rgba(210, 248, 58, 0.55),
+    0 14px 32px -4px rgba(7, 24, 46, 0.35);
+}
+
+.rotating-badge:active {
+  transform: scale(1.02);
+}
+
+/* Rotating Circular Text SVG */
+.badge-text-svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: spinCircle 14s linear infinite;
+  transform-origin: center center;
+}
+
+.rotating-badge:hover .badge-text-svg {
+  animation-duration: 6s;
+}
+
+@keyframes spinCircle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Center Slanted Arrow Icon */
+.badge-center-arrow {
+  position: relative;
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  color: #0b1e38;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.badge-center-arrow svg {
+  width: 24px;
+  height: 24px;
+}
+
+.rotating-badge:hover .badge-center-arrow {
+  transform: translate(2px, -2px) scale(1.15);
+}
+
+/* --------------------------------------------------------------------------
+   Interactive Booking Modal
+   -------------------------------------------------------------------------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(6, 19, 36, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.modal-backdrop.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.modal-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 28px;
+  width: 100%;
+  max-width: 500px;
+  padding: 32px 32px 28px;
+  box-shadow: 0 30px 70px rgba(4, 15, 30, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transform: translateY(24px) scale(0.96);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-backdrop.is-active .modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f1f4f8;
+  border: none;
+  color: #435b77;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.modal-close svg {
+  width: 18px;
+  height: 18px;
+}
+
+.modal-close:hover {
+  background: #e2e8f0;
+  color: #0b1e38;
+  transform: rotate(90deg);
+}
+
+.modal-header {
+  margin-bottom: 20px;
+}
+
+.modal-icon-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #e8f3ff;
+  color: #1765c1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.modal-icon-badge svg {
+  width: 22px;
+  height: 22px;
+}
+
+.modal-header h2 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #0c203b;
+  margin-bottom: 4px;
+}
+
+.modal-header p {
+  color: #5d7594;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #2b425f;
+  letter-spacing: -0.01em;
+}
+
+.form-group input,
+.form-group select {
+  font-family: var(--font-main);
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #d8e2ec;
+  font-size: 0.92rem;
+  color: #0c203b;
+  background: #fbfcfe;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #1765c1;
+  box-shadow: 0 0 0 3px rgba(23, 101, 193, 0.15);
+  background: #ffffff;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.service-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.service-chip {
+  position: relative;
+  border: 1px solid #e1e8f0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #f8fafc;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #334e6d;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.service-chip input {
+  display: none;
+}
+
+.service-chip.active,
+.service-chip:has(input:checked) {
+  background: #eaf3ff;
+  border-color: #1765c1;
+  color: #115099;
+}
+
+.btn-submit-booking {
+  margin-top: 6px;
+  background: #0d223f;
+  color: #ffffff;
+  border: none;
+  padding: 14px 22px;
+  border-radius: 9999px;
+  font-family: var(--font-main);
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 10px 24px rgba(13, 34, 63, 0.25);
+}
+
+.btn-submit-booking svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.25s ease;
+}
+
+.btn-submit-booking:hover {
+  background: #1765c1;
+  box-shadow: 0 12px 30px rgba(23, 101, 193, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-submit-booking:hover svg {
+  transform: translateX(4px);
+}
+
+/* Booking Success State */
+.booking-success {
+  display: none;
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.booking-success.is-visible {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.success-check-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #d2f83a;
+  color: #0d223f;
+  font-size: 1.8rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 24px rgba(210, 248, 58, 0.4);
+}
+
+.booking-success h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #0c203b;
+  margin-bottom: 6px;
+}
+
+.booking-success p {
+  color: #5d7594;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  max-width: 320px;
+  margin-bottom: 20px;
+}
+
+.btn-done {
+  background: #0d223f;
+  color: white;
+  border: none;
+  padding: 10px 28px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-done:hover {
+  background: #1765c1;
+}
+
+/* --------------------------------------------------------------------------
+   Entrance Keyframe Animations
+   -------------------------------------------------------------------------- */
+@keyframes slideDownHeader {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-pop-in {
+  opacity: 0;
+  transform: scale(0.9) translateY(30px);
+  animation: popIn 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes popIn {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Media Queries
+   -------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+  .hero-section {
+    padding: 75px 32px 20px 36px;
+  }
+  
+  .corner-rotating-circle-wrapper {
+    right: 28px;
+    bottom: 20px;
+  }
+
+  .rotating-badge {
+    width: 114px;
+    height: 114px;
+  }
+}
+
+@media (max-width: 992px) {
+  html, body {
+    overflow-y: auto; /* Fallback for small tablet/mobile */
+    height: auto;
+  }
+
+  .hero-section {
+    height: auto;
+    min-height: 100vh;
+    padding: 85px 24px 60px 24px;
+  }
+
+  .hero-content-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-left {
+    max-width: 580px;
+    padding-bottom: 40px;
+  }
+
+  .corner-rotating-circle-wrapper {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    top: 12px;
+    padding: 0 16px;
+  }
+
+  .nav-menu,
+  .nav-actions {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .mobile-drawer {
+    display: block;
+  }
+
+  .hero-section {
+    padding: 85px 16px 40px 16px;
+  }
+
+  .hero-cta-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 20px;
+    padding: 10px 14px;
+    gap: 10px;
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .cta-divider {
+    display: none;
+  }
+
+  .social-proof {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .detail-card-container {
+    margin-top: 10px;
+  }
+
+  .stat-card-glass {
+    min-width: 220px;
+    padding: 16px 70px 16px 18px;
+  }
+
+  .happy-man-wrapper {
+    width: 120px;
+    left: 140px;
+  }
+
+  .corner-rotating-circle-wrapper {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .rotating-badge {
+    width: 98px;
+    height: 98px;
+  }
+
+  .badge-text-svg text {
+    font-size: 13.5px;
+  }
+
+  .modal-card {
+    padding: 24px 18px;
+  }
+
+  .form-row,
+  .service-selector {
+    grid-template-columns: 1fr;
+  }
+}
